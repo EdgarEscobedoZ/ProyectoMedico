@@ -1,0 +1,152 @@
+<html>
+<head>
+	<title>Expeciente paciente</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="Estilos/estilos.css">
+</head>
+<body>
+  
+    <div class="navbar" id= "nav">
+        <a href="index.html">Inicio</a>
+        <div class="dropdown">
+            <a class="drop" href="#">Administrador 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Administrador">
+            <a href="registro_admin.html">Registro</a>
+            <a href="consulta_admin.html">Consulta</a>
+            <a href="actualizacion_admin.html">Actualizar datos</a>
+            <a href="eliminar_admin.html">Eliminar datos</a>
+        </div>
+        </div>
+
+        <div class="dropdown">
+            <a class="drop" href="#Home">Medico 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Medico">
+          <a href="expediente_paciente.html">Expediente Paciente</a>
+          <a href="consultacita.html">Consultar Citas</a>
+          <a href="consultapaciente.html">Consultar Pacientes</a>
+        </div>
+        <div class="cerrarsesion">
+          <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
+      </div>
+      
+    </div>
+    <div style="display: flex;">
+    <div class="login-box" style="top: 84%;  left: 18%;">
+        <h2>Expediente Paciente</h2>
+        <form>
+          <div class="user-box">
+            <input type="text" name="medico" required="">
+            <label>Médico</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="Nombre" required="">
+            <label>Nombre completo</label>
+          </div>
+          <label class ="user-box" style="color:white">Fecha de nacimiento</label>
+          <div class="user-box">
+            <input type="date" name="fechanac" required="">
+          </div>
+          <label class="user-box" style="color:white">Enfermedades crónicas</label>
+          <div class="user-box">            
+            <textarea id="" rows="5" cols="50" ></textarea>
+          </div>
+          <label class="user-box" style="color:white">Alergias</label>
+          <div class="user-box">            
+            <textarea id="" rows="5" cols="50" ></textarea>
+          </div>
+          <label class="user-box" style="color:white">Antecedentes Familiares</label>
+          <div class="user-box">            
+            <textarea id="" rows="5" cols="50" ></textarea>
+          </div>
+        </form>
+    </div>
+
+    <div class="login-box" style="top: 62%; left: 50%;">
+      <h2>Exploración</h2>
+        <form>
+          <label class ="user-box" style="color:white">Fecha de Exploración</label>
+          <div class="user-box">
+            <input type="date" name="fechaexp" required="">
+          </div>
+          <div class="user-box">
+            <input type="number" name="peso" required="">
+            <label>Peso (Kg)</label>
+          </div>
+          <div class="user-box">
+            <input type="number" name="altura" required="">
+            <label>Altura (cm)</label>
+          </div>
+
+          <div class="user-box">
+            <input type="number" name="temperatura" required="">
+            <label>Temperatura (ºC)</label>
+          </div>
+
+          <div class="user-box">
+            <input type="number" name="latidos" required="">
+            <label>Latidos por min.</label>
+          </div>
+          
+          <div class="user-box">
+            <input type="number" name="saturacion" required="">
+            <label>Saturación oxígeno</label>
+          </div>
+        </form>
+    </div>
+
+    <div class="login-box" style="top: 83%; left: 82%;">
+      <h2>Diagnóstico</h2>
+      <form>
+      <label class="user-box" style="color:white">Síntomas</label>
+          <div class="user-box">            
+            <textarea id="" rows="5" cols="50" ></textarea>
+          </div>
+
+          <label class="user-box" style="color:white">Diagnóstico</label>
+          <div class="user-box">            
+            <textarea id="" rows="5" cols="50" ></textarea>
+          </div>
+
+          <label class="user-box" style="color:white">Tratamiento</label>
+          <div class="user-box">            
+            <textarea id="" rows="5" cols="50" ></textarea>
+          </div>
+
+          
+            
+            <a href="#">
+              <span></span> 
+                <span></span>
+                <span></span>
+                <span></span>
+              Registrar Expediente
+            </a>
+            <a href="#">
+              <span></span> 
+                <span></span>
+                <span></span>
+                <span></span>
+              Solicitar Estudios
+            </a>
+            <a href="#">
+              <span></span> 
+                <span></span>
+                <span></span>
+                <span></span>
+              Imprimir Receta
+            </a>   
+         
+        </form>
+    </div>
+  </div>
+
+
+</body>

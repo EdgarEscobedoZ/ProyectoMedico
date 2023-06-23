@@ -1,0 +1,82 @@
+<html>
+<head>
+	<title>Registro de Medico</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="Estilos/estilos.css">
+</head>
+<body>
+
+    <div class="navbar" id= "nav">
+        <a href="index.html">Inicio</a>
+        <div class="dropdown">
+            <a class="drop" href="#">Administrador 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Administrador">
+            <a href="registro_admin.html">Registro</a>
+            <a href="consulta_admin.html">Consulta</a>
+            <a href="actualizacion_admin.html">Actualizar datos</a>
+            <a href="eliminar_admin.html">Eliminar datos</a>
+        </div>
+        </div>
+
+        <div class="dropdown">
+            <a class="drop" href="#Home">Medico 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Medico">
+          <a href="expediente_paciente.html">Expediente Paciente</a>
+          <a href="consultacita.html">Consultar Citas</a>
+          <a href="consultapaciente.html">Consultar Pacientes</a>
+        </div>
+        <div class="cerrarsesion">
+          <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
+      </div>
+      
+    </div>
+
+    <div class="login-box" style="top: 60%">
+        <h2>Registro de Usuario Médico</h2>
+        <form>
+          <div class="user-box">
+            <input type="text" name="RFC" required="">
+            <label>RFC</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="Nombre" required="">
+            <label>Nombre completo</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="cedula" required="">
+            <label>Cedula profesional</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="correo" required="">
+            <label>Correo electronico</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="contrasena" required="">
+            <label>Contrasena</label>
+          </div>
+
+          <div class="user-box">     
+            <select name="rol" required="">
+              <option value="0">Rol</option>
+              <option value="1">Administrador</option>
+              <option value="2">Usuario General</option>
+            </select>
+          </div>
+              <a href="#">
+                <span></span> 
+                <span></span>
+                <span></span>
+                <span></span>
+                Registrar Usuario
+              </a>   
+        </form>   
+    </div>
+</body>

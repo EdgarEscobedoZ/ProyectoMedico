@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Usuario</title>
+    <link rel="stylesheet" href="Estilos/estilos.css">
+</head>
+<body>
+    <div class="navbar" id= "nav">
+        <a href="index.html">Inicio</a>
+        <div class="dropdown">
+            <a class="drop" href="#">Administrador 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Administrador">
+            <a href="registro_admin.html">Registro</a>
+            <a href="consulta_admin.html">Consulta</a>
+            <a href="actualizacion_admin.html">Actualizar datos</a>
+            <a href="eliminar_admin.html">Eliminar datos</a>
+        </div>
+        </div>
+
+        <div class="dropdown">
+            <a class="drop" href="#Home">Medico 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Medico">
+            <a href="expediente_paciente.html">Expediente Paciente</a>
+            <a href="consultacita.html">Consultar Citas</a>
+            <a href="consultapaciente.html">Consultar Pacientes</a>
+        </div>
+        
+        <div class="cerrarsesion">
+            <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
+        </div>
+    </div>
+    
+
+    <div class="" style="display: flex;">
+        <div class="login-box" style="top: 55%; left: 30%;">
+            <h2>Consulta Paciente</h2>
+            <form>
+                <div class="user-box" style="display: flex;">
+                    <input type="text" name="RFC" required="">
+                    <label>Nombre del Paciente</label>
+                    <button type="button">Buscar</button>
+                </div>
+            <textarea id="" rows="10" cols="50" readonly></textarea>
+            <a href="#" >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Consultar
+            </a>
+            </form>
+        </div>
+
+        <div class="login-box" style="top: 82%; left: 65%;">
+            <h2>Consulta Paciente</h2>
+            <form>
+                <div class="user-box">
+                    <input type="text" name="Nombre" required="">
+                    <label>Nombre completo</label>
+                  </div>
+                  <label class ="user-box" style="color:white">Fecha de nacimiento</label>
+                  <div class="user-box">
+                    <input type="date" name="fechanac" required="">
+                  </div>
+                  <label class="user-box" style="color:white">Enfermedades crónicas</label>
+                  <div class="user-box">            
+                    <textarea id="" rows="5" cols="50" ></textarea>
+                  </div>
+                  <label class="user-box" style="color:white">Alergias</label>
+                  <div class="user-box">            
+                    <textarea id="" rows="5" cols="50" ></textarea>
+                  </div>
+                  <label class="user-box" style="color:white">Antecedentes Familiares</label>
+                  <div class="user-box">            
+                    <textarea id="" rows="5" cols="50" ></textarea>
+                  </div>
+            
+
+            <a href="#" >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Editar datos
+            </a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
