@@ -12,3 +12,23 @@ mysql=MySQL(app)
 @app.route('/')
 def index():
     return render_template('login.html')
+
+
+
+@app.route('/registro', methods=('POST'))
+def registrarMedico():
+    if request.method == 'POST':
+        VRFC = request.form['RFC']
+        VNOMBRE = request.form['Nombre']
+        VCEDULA = request.form['cedula']
+        VCORREO = request.form['correo']
+        VCONTRASEÑA = request.form['contraseña']
+        print(VRFC, VNOMBRE, VCEDULA, VCORREO, VCONTRASEÑA)
+    return 'Los datos llegaron'
+
+
+            
+
+
+
+
