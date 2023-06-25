@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar Usuario</title>
-    <link rel="stylesheet" href="Estilos/estilos.css">
+    <title>Consulta Usuario</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
 </head>
 <body>
     <div class="navbar" id= "nav">
@@ -35,26 +35,26 @@
             <a href="consultacita.html">Consultar Citas</a>
             <a href="consultapaciente.html">Consultar Pacientes</a>
         </div>
+        
         <div class="cerrarsesion">
             <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
         </div>
-        
     </div>
-    <div class="login-box">
-        <h2>Eliminar Usuario</h2>
+    
+    <div class="login-box" style="top: 55%">
+        <h2>Consulta Usuario</h2>
         <form>
-            <div class="user-box" style="display: flex;">
-                <input type="text" name="RFC" required="">
-                <label>RFC</label>
-                <button type="button">Buscar</button>
-              </div>
+          <div class="user-box">
+            <input type="text" name="" required="">
+            <label>RFC</label>
+          </div>
           <textarea id="" rows="10" cols="50" readonly></textarea>
           <a href="#" >
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Eliminar
+            Consultar
           </a>
         </form>
     

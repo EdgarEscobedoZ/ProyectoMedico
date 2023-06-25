@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta Usuario</title>
-    <link rel="stylesheet" href="Estilos/estilos.css">
+	<title>Index</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
 </head>
 <body>
+
     <div class="navbar" id= "nav">
         <a href="index.html">Inicio</a>
         <div class="dropdown">
-            <a class="drop" href="#">Administrador 
+            <a class="drop" href="">Administrador 
             <i class="fa fa-angle-double-down"></i>
             <i class="fa fa-angle-double-up"></i>
             </a>
 
         <div class="drop-content" id="Administrador">
-            <a href="registro_admin.html">Registro</a>
+            <a href="registro_admin.html">Registro de Médico</a>
             <a href="consulta_admin.html">Consulta</a>
             <a href="actualizacion_admin.html">Actualizar datos</a>
             <a href="eliminar_admin.html">Eliminar datos</a>
@@ -25,7 +23,7 @@
         </div>
 
         <div class="dropdown">
-            <a class="drop" href="#Home">Medico 
+            <a class="drop" href="#Home">Médico 
             <i class="fa fa-angle-double-down"></i>
             <i class="fa fa-angle-double-up"></i>
             </a>
@@ -35,29 +33,19 @@
             <a href="consultacita.html">Consultar Citas</a>
             <a href="consultapaciente.html">Consultar Pacientes</a>
         </div>
-        
         <div class="cerrarsesion">
             <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
         </div>
+        
+        
+
+        
+        
     </div>
-    
-    <div class="login-box" style="top: 55%">
-        <h2>Consulta Usuario</h2>
-        <form>
-          <div class="user-box">
-            <input type="text" name="" required="">
-            <label>RFC</label>
-          </div>
-          <textarea id="" rows="10" cols="50" readonly></textarea>
-          <a href="#" >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Consultar
-          </a>
-        </form>
-    
-      </div>
+
+    <div class="login-box">
+            <h2>Bienvenido Médico Administrador</h2>
+    </div>
+
+
 </body>
-</html>

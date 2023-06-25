@@ -1,8 +1,8 @@
 <html>
 <head>
-	<title>Actualizar Usuario</title>
+	<title>Registro de Medico</title>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="Estilos/estilos.css">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
 </head>
 <body>
 
@@ -34,20 +34,18 @@
           <a href="consultapaciente.html">Consultar Pacientes</a>
         </div>
         <div class="cerrarsesion">
-            <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
-        </div>
-       
+          <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
+      </div>
+      
     </div>
-    
-    <div class="login-box" style="top: 65%">
-        <h2>Actualizar datos</h2>
-        <form>
-          <div class="user-box" style="display: flex;">
+
+    <div class="login-box" style="top: 60%">
+        <h2>Registro de Usuario Médico</h2>
+        <form action="/registro_admin" method="POST">
+          <div class="user-box">
             <input type="text" name="RFC" required="">
             <label>RFC</label>
-            <button type="button">Buscar</button>
           </div>
-          
           <div class="user-box">
             <input type="text" name="Nombre" required="">
             <label>Nombre completo</label>
@@ -72,14 +70,7 @@
               <option value="2">Usuario General</option>
             </select>
           </div>
-              <a href="#">
-                <span></span> 
-                <span></span>
-                <span></span>
-                <span></span>
-                Actualizar Datos
-              </a>      
+              <button type="submit">Registrar</button> 
+        </form>   
     </div>
-
-
 </body>

@@ -2,7 +2,7 @@
 <head>
 	<title>Expeciente paciente</title>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="Estilos/estilos.css">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
 </head>
 <body>
   
@@ -41,7 +41,7 @@
     <div style="display: flex;">
     <div class="login-box" style="top: 75%;">
         <h2>Expediente Paciente</h2>
-        <form>
+        <form action="/expediente_paciente" method="POST">
           <div class="user-box">
             <input type="text" name="medico" required="">
             <label>Médico</label>
@@ -56,16 +56,17 @@
           </div>
           <label class="user-box" style="color:white">Enfermedades crónicas</label>
           <div class="user-box">            
-            <textarea id="" rows="5" cols="50" ></textarea>
+            <textarea rows="5" cols="50" name="enfermedades"></textarea>
           </div>
-          <label class="user-box" style="color:white">Alergias</label>
+          <label class="user-box" style="color:white" >Alergias</label>
           <div class="user-box">            
-            <textarea id="" rows="5" cols="50" ></textarea>
+            <textarea rows="5" cols="50" name="alergia"></textarea>
           </div>
-          <label class="user-box" style="color:white">Antecedentes Familiares</label>
+          <label class="user-box" style="color:white" >Antecedentes Familiares</label>
           <div class="user-box">            
-            <textarea id="" rows="5" cols="50" ></textarea>
+            <textarea rows="5" cols="50" name="antecedentes"></textarea>
           </div>
+          <button type="submit">Registrar</button> 
         </form>
     </div>
 

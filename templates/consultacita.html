@@ -2,7 +2,7 @@
 <head>
 	<title>Index</title>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" href="Estilos/estilos.css">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
 </head>
 <body>
 
@@ -43,8 +43,28 @@
         
     </div>
 
-    <div class="login-box">
-            <h2>Bienvenido Médico Administrador</h2>
+    <div class="login-box" style="top: 65%;">
+            <h2>Citas médicas</h2>
+            <form>
+                <div class="user-box">     
+                    <select name="ordenar" required="">
+                      <option value="0">Ordenar por</option>
+                      <option value="1">Nombre Paciente</option>
+                      <option value="2">Fecha</option>
+                    </select>
+                    <input type="text" name="ordenar2" required="" placeholder="Ingrese"></input>
+                    <button type="button" style="width: 320px;">Ordenar y consultar</button>
+                  </div>
+                  <textarea id="" rows="10" cols="50" readonly></textarea>
+
+                  <a href="#">
+                    <span></span> 
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Imprimir Receta
+                  </a>   
+            </form>
     </div>
 
 
