@@ -23,6 +23,28 @@ def login2():
 def index():
     return render_template('index.html')
 
+@app.route('/consulta_admin.html')
+def consultaad():
+    return render_template('consulta_admin.html')
+
+@app.route('/actualizacion_admin.html')
+def actuadmin():
+    return render_template('actualizacion_admin.html')
+
+@app.route('/eliminar_admin.html')
+def eliminaradmin():
+    return render_template('eliminar_admin.html')
+
+@app.route('/consultacita.html')
+def consultacita():
+    return render_template('consultacita.html')
+
+@app.route('/consultapaciente.html')
+def consultapaciente():
+    return render_template('consultapaciente.html')
+
+
+
 @app.route('/registro_admin.html')
 def registro_admin():
     return render_template('registro_admin.html')
