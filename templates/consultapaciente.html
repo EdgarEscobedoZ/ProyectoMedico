@@ -1,46 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta Usuario</title>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
-</head>
-<body>
-    <div class="navbar" id= "nav">
-        <a href="index.html">Inicio</a>
-        <div class="dropdown">
-            <a class="drop" href="#">Administrador 
-            <i class="fa fa-angle-double-down"></i>
-            <i class="fa fa-angle-double-up"></i>
-            </a>
+{% extends 'plantilla.html' %}
 
-        <div class="drop-content" id="Administrador">
-            <a href="registro_admin.html">Registro</a>
-            <a href="consulta_admin.html">Consulta</a>
-            <a href="actualizacion_admin.html">Actualizar datos</a>
-            <a href="eliminar_admin.html">Eliminar datos</a>
-        </div>
-        </div>
-
-        <div class="dropdown">
-            <a class="drop" href="#Home">Medico 
-            <i class="fa fa-angle-double-down"></i>
-            <i class="fa fa-angle-double-up"></i>
-            </a>
-
-        <div class="drop-content" id="Medico">
-            <a href="expediente_paciente.html">Expediente Paciente</a>
-            <a href="consultacita.html">Consultar Citas</a>
-            <a href="consultapaciente.html">Consultar Pacientes</a>
-        </div>
-        
-        <div class="cerrarsesion">
-            <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
-        </div>
-    </div>
-    
+{% block body %}
 
     <div class="" style="display: flex;">
         <div class="login-box" style="top: 55%; left: 30%;">
@@ -97,5 +57,5 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+
+{% endblock %}

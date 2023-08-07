@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro Médico</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
+
+</head>
+<body>
+    
+    <div class="navbar" id= "nav">
+        <a href="index.html">Inicio</a>
+        <div class="dropdown">
+            <a class="drop" href="">Administrador 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Administrador">
+            <a href="registro_admin.html">Registro de Médico</a>
+            <a href="consulta_admin.html">Consulta</a>
+            <a href="actualizacion_admin.html">Actualizar datos</a>
+            <a href="eliminar_admin.html">Eliminar datos</a>
+        </div>
+        </div>
+
+        <div class="dropdown">
+            <a class="drop" href="#Home">Médico 
+            <i class="fa fa-angle-double-down"></i>
+            <i class="fa fa-angle-double-up"></i>
+            </a>
+
+        <div class="drop-content" id="Medico">
+            <a href="expediente_paciente.html">Expediente Paciente</a>
+            <a href="consultacita.html">Consultar Citas</a>
+            <a href="consultapaciente.html">Consultar Pacientes</a>
+        </div> 
+        
+    </div>
+
+    <div class="cerrarsesion">
+        <a href="login.html" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
+    </div>
+
+    {% block body %}
+
+    {% endblock %}
+
+</body>
+</html>
+
+
+

@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
-</head>
-<body>
-    <div class="login-box" style="top: 62%; left: 50%;">
-        <h2>Exploración</h2>
-          <form>
+{% extends 'plantilla.html' %}
+
+{% block body %}
+
+<div class="login-box" style="top: 62%; left: 50%;">
+    <h2>Exploración</h2>
+    <form>
             <label class ="user-box" style="color:white">Fecha de Exploración</label>
             <div class="user-box">
               <input type="date" name="fechaexp" required="">
@@ -38,10 +32,10 @@
               <input type="number" name="saturacion" required="">
               <label>Saturación oxígeno</label>
             </div>
-          </form>
-      </div>
+    </form>
+</div>
   
-      <div class="login-box" style="top: 83%; left: 82%;">
+<div class="login-box" style="top: 83%; left: 82%;">
         <h2>Diagnóstico</h2>
         <form>
         <label class="user-box" style="color:white">Síntomas</label>
@@ -84,6 +78,6 @@
               </a>   
            
           </form>
-      </div>
-</body>
-</html>
+</div>
+
+{% endblock %}
