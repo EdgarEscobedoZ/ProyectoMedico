@@ -15,41 +15,37 @@ mysql=MySQL(app)
 def login():
     return render_template('login.html')
 
-@app.route('/login.html')
-def login2():
-    return render_template('login.html')
-
-@app.route('/index.html')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
-@app.route('/consulta_admin.html')
+@app.route('/consulta_admin')
 def consultaad():
-    return render_template('consulta_admin.html')
+    return render_template('MedicoAdmin/consulta_admin.html')
 
-@app.route('/actualizacion_admin.html')
+@app.route('/actualizacion_admin')
 def actuadmin():
-    return render_template('actualizacion_admin.html')
+    return render_template('MedicoAdmin/actualizacion_admin.html')
 
-@app.route('/eliminar_admin.html')
+@app.route('/eliminar_admin')
 def eliminaradmin():
-    return render_template('eliminar_admin.html')
+    return render_template('MedicoAdmin/eliminar_admin.html')
 
-@app.route('/consultacita.html')
+@app.route('/consultacita')
 def consultacita():
-    return render_template('consultacita.html')
+    return render_template('Medico/consultacita.html')
 
-@app.route('/consultapaciente.html')
+@app.route('/consultapaciente')
 def consultapaciente():
-    return render_template('consultapaciente.html')
+    return render_template('Medico/consultapaciente.html')
 
 
 
-@app.route('/registro_admin.html')
+@app.route('/registro_admin')
 def registro_admin():
-    return render_template('registro_admin.html')
+    return render_template('MedicoAdmin/registro_admin.html')
 
-@app.route("/registro_admin", methods=['POST'])
+@app.route("/registro_adminBD", methods=['POST'])
 def registrarMedico():
     if request.method == 'POST':
         VRFC = request.form['RFC']
@@ -66,11 +62,11 @@ def registrarMedico():
         
     return render_template('ventanaemergente.html')
 
-@app.route('/expediente_paciente.html')
+@app.route('/expediente_paciente')
 def expediente_paciente():
-    return render_template('expediente_paciente.html')
+    return render_template('Medico/expediente_paciente.html')
 
-@app.route("/expediente_paciente", methods=['POST'])
+@app.route("/expediente_pacienteBD", methods=['POST'])
 def registrarPaciente():
     if request.method == 'POST':
         VMEDICO = request.form['medico']
