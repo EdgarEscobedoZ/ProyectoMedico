@@ -8,8 +8,14 @@
           <h2>Expediente Paciente</h2>
           <form action="/expediente_paciente" method="POST">
             <div class="user-box">
-              <input type="text" name="medico" required="">
-              <label>Médico</label>
+              
+
+              <select name="medico" id="">
+                <option selected>Médico</option>
+                {% for med in medico %}
+                  <option value="{{med.0}}">{{med.0}}</option>
+                {% endfor %}
+              </select>
             </div>
             <div class="user-box">
               <input type="text" name="Nombre" required="">

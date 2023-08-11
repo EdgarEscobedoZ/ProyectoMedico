@@ -19,6 +19,30 @@ def login():
 def index():
     return render_template('index.html')
 
+# MEDICO ADMINISTRADOR #
+
+@app.route('/registro_admin')
+def registro_admin():
+    return render_template('MedicoAdmin/registro_admin.html')
+
+@app.route("/registro_adminBD", methods=['POST'])
+def registrarMedico():
+    if request.method == 'POST':
+        VRFC = request.form['RFC']
+        VNOMBRE = request.form['Nombre']
+        VCEDULA = request.form['cedula']
+        VCORREO = request.form['correo']
+        VCONTRASEÑA = request.form['contrasena']
+        VROL = request.form['rol']
+
+        cs = mysql.connection.cursor()
+        cs.execute('INSERT INTO tb_medicos (rfc, nombre_completo, cedula, correo, contraseña, rol) VALUES (%s, %s, %s, %s, %s, %s)', (VRFC, VNOMBRE, VCEDULA, VCORREO, VCONTRASEÑA, VROL))
+        mysql.connection.commit()
+        
+
+    flash('Mensaje')
+    return redirect(url_for('index'))
+
 @app.route('/consulta_admin')
 def consultaad():
     cs = mysql.connection.cursor()
@@ -58,6 +82,17 @@ def eliminaradmin(id):
     data = cs.fetchall()
     return render_template('MedicoAdmin/eliminar_admin.html', Eliminar = data)
 
+@app.route('/eliminar_adminBD/<id>', methods=['POST'])
+def eliminaradminBD(id):
+    if request.method == 'POST':
+        cs = mysql.connection.cursor()
+        cs.execute('DELETE FROM tb_medicos WHERE id = %s', (id,))
+        mysql.connection.commit()
+    flash('Mensaje')
+    return redirect(url_for('consultaad'))
+
+# MEDICO USUARIO #
+
 @app.route('/consultacita')
 def consultacita():
     return render_template('Medico/consultacita.html')
@@ -66,33 +101,12 @@ def consultacita():
 def consultapaciente():
     return render_template('Medico/consultapaciente.html')
 
-
-
-@app.route('/registro_admin')
-def registro_admin():
-    return render_template('MedicoAdmin/registro_admin.html')
-
-@app.route("/registro_adminBD", methods=['POST'])
-def registrarMedico():
-    if request.method == 'POST':
-        VRFC = request.form['RFC']
-        VNOMBRE = request.form['Nombre']
-        VCEDULA = request.form['cedula']
-        VCORREO = request.form['correo']
-        VCONTRASEÑA = request.form['contrasena']
-        VROL = request.form['rol']
-
-        cs = mysql.connection.cursor()
-        cs.execute('INSERT INTO tb_medicos (rfc, nombre_completo, cedula, correo, contraseña, rol) VALUES (%s, %s, %s, %s, %s, %s)', (VRFC, VNOMBRE, VCEDULA, VCORREO, VCONTRASEÑA, VROL))
-        mysql.connection.commit()
-        
-
-    flash('Mensaje')
-    return redirect(url_for('index'))
-
 @app.route('/expediente_paciente')
 def expediente_paciente():
-    return render_template('Medico/expediente_paciente.html')
+    cs = mysql.connection.cursor()
+    cs.execute('SELECT nombre_completo FROM tb_medicos')
+    data = cs.fetchall()
+    return render_template('Medico/expediente_paciente.html', medico = data)
 
 @app.route("/expediente_pacienteBD", methods=['POST'])
 def registrarPaciente():
