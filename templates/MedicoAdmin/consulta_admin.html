@@ -2,22 +2,58 @@
 
 {% block body %}
 
-    <div class="login-box" style="top: 55%">
-        <h2>Consulta Usuario</h2>
-        <form>
-          <div class="user-box">
-            <input type="text" name="" required="">
-            <label>RFC</label>
-          </div>
-          <textarea id="" rows="10" cols="50" readonly></textarea>
-          <a href="#" >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Consultar
-          </a>
-        </form>
+
+{% with mensajes= get_flashed_messages() %}
+{% if mensajes %}
+    {% for msj in mensajes%}
+
+        <script> Swal.fire('Datos Guardados', '¡Los datos se actualizaron con éxito!', 'success')</script>
+
+    {%endfor%}
+{% endif %}
+{% endwith %}
+
+ <div class="container text-center">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="">Consulta de Usuarios</h2>
+        <table class="login-box">
+          <thead>
+            <tr style="color: #03e9f4;">
+              <th>Id</th>
+              <th>RFC</th>
+              <th>Nombre</th>
+              <th>Cedula</th>
+              <th>Correo E</th>
+              <th>Contraseña</th>
+              <th>Rol</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for med in medico %}
+            <tr style="color: white;">
+              <td>{{med.0}}</td>
+              <td>{{med.1}}</td>
+              <td>{{med.2}}</td>
+              <td>{{med.3}}</td>
+              <td>{{med.4}}</td>
+              <td>{{med.5}}</td>
+              <td>{{med.6}}</td>
+              <td>
+                <a href="/actualizacion_admin/{{med.0}}">Editar</a>
+              </td>
+              <td>
+                <a href="/eliminar_admin/{{med.0}}">Eliminar</a>
+              </td>
+            </tr>            
+            {% endfor %}
+          </tbody>
+        </table>
+
+    </div>
+  </div>
+ </div>
+  
     
       </div>
 

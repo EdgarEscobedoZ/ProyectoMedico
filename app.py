@@ -21,15 +21,42 @@ def index():
 
 @app.route('/consulta_admin')
 def consultaad():
-    return render_template('MedicoAdmin/consulta_admin.html')
+    cs = mysql.connection.cursor()
+    cs.execute('SELECT * FROM tb_medicos')
+    data = cs.fetchall()
+    return render_template('MedicoAdmin/consulta_admin.html', medico = data)
 
-@app.route('/actualizacion_admin')
-def actuadmin():
-    return render_template('MedicoAdmin/actualizacion_admin.html')
 
-@app.route('/eliminar_admin')
-def eliminaradmin():
-    return render_template('MedicoAdmin/eliminar_admin.html')
+@app.route('/actualizacion_admin/<id>')
+def actuadmin(id):
+    cs = mysql.connection.cursor()
+    cs.execute('SELECT * FROM tb_medicos where id = %s', (id,))
+    data = cs.fetchall()
+    return render_template('MedicoAdmin/actualizacion_admin.html', Edicion = data)
+
+@app.route('/actualizacion_adminBD/<id>', methods=['POST'])
+def actuadminBD(id):
+    if request.method == 'POST':
+        VRFC = request.form['RFC']
+        VNOMBRE = request.form['Nombre']
+        VCEDULA = request.form['cedula']
+        VCORREO = request.form['correo']
+        VCONTRASEÑA = request.form['contrasena']
+        VROL = request.form['rol']
+
+        cs = mysql.connection.cursor()
+        cs.execute('UPDATE tb_medicos SET rfc = %s, nombre_completo = %s, cedula = %s, correo = %s, contraseña = %s, rol = %s WHERE id = %s', (VRFC, VNOMBRE, VCEDULA, VCORREO, VCONTRASEÑA, VROL, id))
+        mysql.connection.commit()
+    
+    flash('Mensaje')
+    return redirect(url_for('consultaad'))
+
+@app.route('/eliminar_admin/<id>')
+def eliminaradmin(id):
+    cs = mysql.connection.cursor()
+    cs.execute('select * from tb_medicos where id = %s', (id,))
+    data = cs.fetchall()
+    return render_template('MedicoAdmin/eliminar_admin.html', Eliminar = data)
 
 @app.route('/consultacita')
 def consultacita():
@@ -58,9 +85,10 @@ def registrarMedico():
         cs = mysql.connection.cursor()
         cs.execute('INSERT INTO tb_medicos (rfc, nombre_completo, cedula, correo, contraseña, rol) VALUES (%s, %s, %s, %s, %s, %s)', (VRFC, VNOMBRE, VCEDULA, VCORREO, VCONTRASEÑA, VROL))
         mysql.connection.commit()
-
         
-    return render_template('ventanaemergente.html')
+
+    flash('Mensaje')
+    return redirect(url_for('index'))
 
 @app.route('/expediente_paciente')
 def expediente_paciente():

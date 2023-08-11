@@ -1,47 +1,41 @@
 {% extends 'plantilla.html' %}
 
 {% block body %}
-    
-    <div class="login-box" style="top: 65%">
-        <h2>Actualizar datos</h2>
-        <form>
-          <div class="user-box" style="display: flex;">
-            <input type="text" name="RFC" required="">
-            <label>RFC</label>
-            <button type="button">Buscar</button>
-          </div>
-          
-          <div class="user-box">
-            <input type="text" name="Nombre" required="">
-            <label>Nombre completo</label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="cedula" required="">
-            <label>Cedula profesional</label>
-          </div>
-          <div class="user-box">
-            <input type="email" name="correo" required="">
-            <label>Correo electronico</label>
-          </div>
-          <div class="user-box">
-            <input type="password" name="contrasena" required="">
-            <label>Contrasena</label>
-          </div>
 
-          <div class="user-box">     
-            <select name="rol" required="">
-              <option value="0">Rol</option>
-              <option value="1">Administrador</option>
-              <option value="2">Usuario General</option>
-            </select>
-          </div>
-              <a href="#">
-                <span></span> 
-                <span></span>
-                <span></span>
-                <span></span>
-                Actualizar Datos
-              </a>      
+
+<div class="login-box" style="top: 60%">
+  <h2>Actualización de Usuario Médico</h2>
+  <form action="/actualizacion_adminBD/{{Edicion.0.0}}" method="POST">
+    <div class="user-box">
+      <input type="text" name="RFC" value="{{Edicion.0.1}}" required >
+      <label>RFC</label>
     </div>
+    <div class="user-box">
+      <input type="text" name="Nombre" value="{{Edicion.0.2}}" required>
+      <label>Nombre completo</label>
+    </div>
+    <div class="user-box">
+      <input type="text" name="cedula" value="{{Edicion.0.3}}" required>
+      <label>Cedula profesional</label>
+    </div>
+    <div class="user-box">
+      <input type="email" name="correo" value="{{Edicion.0.4}}" required>
+      <label>Correo electronico</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="contrasena" value="{{Edicion.0.5}}" required>
+      <label>Contrasena</label>
+    </div>
+
+    <div class="user-box">     
+      <select name="rol" required="">
+        <option selected>Rol</option>
+        <option value="1">Administrador</option>
+        <option value="2">Usuario General</option>
+      </select>
+    </div>
+        <button type="submit">Registrar</button> 
+  </form>   
+</div>
 
 {% endblock %}

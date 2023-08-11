@@ -2,6 +2,17 @@
 
 {% block body %}
     
+{% with mensajes= get_flashed_messages() %}
+{% if mensajes %}
+    {% for msj in mensajes%}
+
+        <script> Swal.fire('Datos Guardados', '¡Los datos se guardaron con éxito!', 'success')</script>
+
+    {%endfor%}
+{% endif %}
+{% endwith %}
+
+
 
     <div class="login-box">
             <h2>Bienvenido Médico Administrador</h2>

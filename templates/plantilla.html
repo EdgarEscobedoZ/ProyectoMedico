@@ -6,6 +6,8 @@
     <title>Centro Médico</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="estilos.css")}}">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     
@@ -42,7 +44,7 @@
     <div class="cerrarsesion">
         <a href="/" class="cerrarsesion" style="position: absolute; right: 0%;">Cerrar Sesión</a>
     </div>
-
+    </div>
     {% block body %}
 
     {% endblock %}
