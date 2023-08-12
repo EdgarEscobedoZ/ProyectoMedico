@@ -19,7 +19,7 @@ def login():
 def index():
     return render_template('index.html')
 
-# MEDICO ADMINISTRADOR #
+#   MEDICO ADMINISTRADOR    #
 
 @app.route('/registro_admin')
 def registro_admin():
@@ -29,7 +29,7 @@ def registro_admin():
 def registrarMedico():
     if request.method == 'POST':
         VRFC = request.form['RFC']
-        VNOMBRE = request.form['Nombre']
+        VNOMBRE = request.form['nombrec']
         VCEDULA = request.form['cedula']
         VCORREO = request.form['correo']
         VCONTRASEÑA = request.form['contrasena']
@@ -41,15 +41,14 @@ def registrarMedico():
         
 
     flash('Mensaje')
-    return redirect(url_for('index'))
+    return redirect(url_for('registro_admin'))
 
 @app.route('/consulta_admin')
-def consultaad():
-    cs = mysql.connection.cursor()
-    cs.execute('SELECT * FROM tb_medicos')
-    data = cs.fetchall()
-    return render_template('MedicoAdmin/consulta_admin.html', medico = data)
-
+def consulta_admin():
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM tb_medicos')
+    data = cur.fetchall()
+    return render_template('MedicoAdmin/consulta_admin.html', medicos = data)
 
 @app.route('/actualizacion_admin/<id>')
 def actuadmin(id):
@@ -62,7 +61,7 @@ def actuadmin(id):
 def actuadminBD(id):
     if request.method == 'POST':
         VRFC = request.form['RFC']
-        VNOMBRE = request.form['Nombre']
+        VNOMBRE = request.form['nombrec']
         VCEDULA = request.form['cedula']
         VCORREO = request.form['correo']
         VCONTRASEÑA = request.form['contrasena']
@@ -73,7 +72,7 @@ def actuadminBD(id):
         mysql.connection.commit()
     
     flash('Mensaje')
-    return redirect(url_for('consultaad'))
+    return redirect(url_for('consulta_admin'))
 
 @app.route('/eliminar_admin/<id>')
 def eliminaradmin(id):
@@ -89,17 +88,9 @@ def eliminaradminBD(id):
         cs.execute('DELETE FROM tb_medicos WHERE id = %s', (id,))
         mysql.connection.commit()
     flash('Mensaje')
-    return redirect(url_for('consultaad'))
+    return redirect(url_for('consulta_admin'))
 
-# MEDICO USUARIO #
-
-@app.route('/consultacita')
-def consultacita():
-    return render_template('Medico/consultacita.html')
-
-@app.route('/consultapaciente')
-def consultapaciente():
-    return render_template('Medico/consultapaciente.html')
+#   MEDICO GENERAL  #
 
 @app.route('/expediente_paciente')
 def expediente_paciente():
@@ -111,7 +102,7 @@ def expediente_paciente():
 @app.route("/expediente_pacienteBD", methods=['POST'])
 def registrarPaciente():
     if request.method == 'POST':
-        VMEDICO = request.form['medico']
+        VMEDICO = request.form.get("medico", False)
         VNOMBRE = request.form['Nombre']
         VFECHANAC = request.form['fechanac']
         VENFERMEDAD = request.form['enfermedades']
@@ -125,9 +116,16 @@ def registrarPaciente():
         cs.execute('INSERT INTO tb_pacientes (medico, nombre_completo, fecha_nacimiento, enfermedades_cronicas, alergias, antecendentes_familiares) VALUES (%s, %s, %s, %s, %s, %s)',(VMEDICO, VNOMBRE, VFECHANAC, VENFERMEDAD, VALERGIAS, VANTECEDENTES))
         mysql.connection.commit()
 
+    flash('Mensaje')
+    return redirect(url_for('expediente_paciente'))
 
-    return render_template('ventanaemergente.html')
-
+@app.route('/exploracion')
+def exploracion():
+    cs = mysql.connection.cursor()
+    cs.execute('SELECT nombre_completo FROM tb_pacientes')
+    data = cs.fetchall()
+    return render_template('Medico/exploraciondiagnostico.html', pacientes = data)
+    
 
 #Ejecucion del servidor
 

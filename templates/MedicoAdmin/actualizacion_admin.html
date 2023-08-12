@@ -3,39 +3,63 @@
 {% block body %}
 
 
-<div class="login-box" style="top: 60%">
-  <h2>Actualización de Usuario Médico</h2>
-  <form action="/actualizacion_adminBD/{{Edicion.0.0}}" method="POST">
-    <div class="user-box">
-      <input type="text" name="RFC" value="{{Edicion.0.1}}" required >
-      <label>RFC</label>
-    </div>
-    <div class="user-box">
-      <input type="text" name="Nombre" value="{{Edicion.0.2}}" required>
-      <label>Nombre completo</label>
-    </div>
-    <div class="user-box">
-      <input type="text" name="cedula" value="{{Edicion.0.3}}" required>
-      <label>Cedula profesional</label>
-    </div>
-    <div class="user-box">
-      <input type="email" name="correo" value="{{Edicion.0.4}}" required>
-      <label>Correo electronico</label>
-    </div>
-    <div class="user-box">
-      <input type="password" name="contrasena" value="{{Edicion.0.5}}" required>
-      <label>Contrasena</label>
-    </div>
+<div class="container text-center">
 
-    <div class="user-box">     
-      <select name="rol" required="">
-        <option selected>Rol</option>
-        <option value="1">Administrador</option>
-        <option value="2">Usuario General</option>
-      </select>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+
+            <h1 class="mt-5" style="color: white;">Actualizar Datos</h1>
+
+            <div class="card card-body mb-5">
+                <form action="/actualizacion_adminBD/{{Edicion.0.0}}" method="POST">
+
+                    <div class="form-floating mb-3">                            
+                        <input class="form-control" name="RFC" type="text" id="rfc" placeholder="RFC" value="{{Edicion.0.1}}" required>
+                        <label class="label" for="rfc">RFC</label>
+                    </div>
+
+                    <div class="form-floating mb-3">                            
+                        <input class="form-control" name="nombrec" id="nombre" type="text" placeholder="Nombre Completo" value="{{Edicion.0.2}}" required>
+                        <label class="label" for="nombre">Nombre Completo</label>
+                    </div>
+
+                    <div class="form-floating mb-3">                            
+                        <input class="form-control" name="cedula" id="fcedula" type="text" placeholder="Cedula Profesional" value="{{Edicion.0.3}}" required>
+                        <label class="label" for="fcedula">Cedula Profesional</label>
+                    </div>
+
+                    <div class="form-floating mb-3">                            
+                        <input class="form-control" name="correo" id="fcorreo" type="email" placeholder="Correo Electrónico" value="{{Edicion.0.4}}" required>
+                        <label class="label" for="fcorreo">Correo Electrónico</label>
+                    </div>
+
+                    <div class="form-floating mb-3">                            
+                        <input class="form-control" name="contrasena" id="fcontra" type="password" placeholder="Contraseña" value="{{Edicion.0.5}}" required>
+                        <label class="label" for="fcontra">Contraseña</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select"  name="rol" id="frol" required> 
+                            <option selected>Seleccione</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Medico</option>
+                        </select>
+                        <label class="label" for="frol">Rol</label>
+                    </div>
+
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                    
+
+                </form>
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
     </div>
-        <button type="submit">Registrar</button> 
-  </form>   
+        
 </div>
 
 {% endblock %}

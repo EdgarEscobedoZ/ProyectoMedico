@@ -2,39 +2,76 @@
 
 {% block body %}
 
-<div class="login-box" style="top: 60%">
-        <h2>Registro de Usuario Médico</h2>
-        <form action="/registro_adminBD" method="POST">
-          <div class="user-box">
-            <input type="text" name="RFC" required>
-            <label>RFC</label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="Nombre" required>
-            <label>Nombre completo</label>
-          </div>
-          <div class="user-box">
-            <input type="text" name="cedula" required>
-            <label>Cedula profesional</label>
-          </div>
-          <div class="user-box">
-            <input type="email" name="correo" required>
-            <label>Correo electronico</label>
-          </div>
-          <div class="user-box">
-            <input type="password" name="contrasena" required>
-            <label>Contrasena</label>
-          </div>
+    
+{% with mensajes= get_flashed_messages() %}
+{% if mensajes %}
 
-          <div class="user-box">     
-            <select name="rol" required="">
-              <option value="0">Rol</option>
-              <option value="1">Administrador</option>
-              <option value="2">Usuario General</option>
-            </select>
-          </div>
-              <button type="submit">Registrar</button> 
-        </form>   
+    {% for msj in mensajes%}
+
+        <script> Swal.fire('Datos Guardados', '¡Los datos se registraron con éxito!', 'success')</script>
+
+    {%endfor%}
+{% endif %}
+{% endwith %}
+
+
+    <div class="container text-center">
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+
+                <h1 class="mt-5" style="color: white;">Registro Médico Administrador</h1>
+
+                <div class="card card-body mb-5">
+                    <form action="/registro_adminBD" method="POST">
+
+                        <div class="form-floating mb-3">                            
+                            <input class="form-control" name="RFC" type="text" id="rfc" placeholder="RFC" required>
+                            <label class="label" for="rfc">RFC</label>
+                        </div>
+
+                        <div class="form-floating mb-3">                            
+                            <input class="form-control" name="nombrec" id="nombre" type="text" placeholder="Nombre Completo" required>
+                            <label class="label" for="nombre">Nombre Completo</label>
+                        </div>
+
+                        <div class="form-floating mb-3">                            
+                            <input class="form-control" name="cedula" id="fcedula" type="text" placeholder="Cedula Profesional" required>
+                            <label class="label" for="fcedula">Cedula Profesional</label>
+                        </div>
+
+                        <div class="form-floating mb-3">                            
+                            <input class="form-control" name="correo" id="fcorreo" type="email" placeholder="Correo Electrónico" required>
+                            <label class="label" for="fcorreo">Correo Electrónico</label>
+                        </div>
+
+                        <div class="form-floating mb-3">                            
+                            <input class="form-control" name="contrasena" id="fcontra" type="password" placeholder="Contraseña" required>
+                            <label class="label" for="fcontra">Contraseña</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select"  name="rol" id="frol" required> 
+                                <option selected>Seleccione</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Medico</option>
+                            </select>
+                            <label class="label" for="frol">Rol</label>
+                        </div>
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                        
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+            
     </div>
 
 {% endblock %}

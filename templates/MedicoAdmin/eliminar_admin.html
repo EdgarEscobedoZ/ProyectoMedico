@@ -2,23 +2,27 @@
 
 {% block body %}
 
-<div class="login-box">
-    <h2>Eliminar Usuario</h2>
-        <form action="/eliminar_adminBD/{{Eliminar.0.0}}" method="POST">
-                <div class="user-box" style="display: flex;">
-                    <h2>¿Estás seguro de eliminar el medico con RFC: {{Eliminar.0.1}}?</h2>
-                    
-                </div>
-                <a>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <button type="submit">Sí</button>
+<div class="container text-center">
 
-                </a>
-        </form>
-    
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card card-body mt-5">
+                <h1>Eliminar Usuario</h1>
+                <form action="/eliminar_adminBD/{{Eliminar.0.0}}" method="POST">
+                        <div class="user-box" style="display: flex;">
+                            <h2>¿Estás seguro de eliminar el medico con RFC: {{Eliminar.0.1}}?</h2>
+                            
+                        </div>
+
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-danger">Sí</button>
+                        </div>
+                </form>
+            </div>            
+        </div>
+        <div class="col-md-4"></div>
+    </div>
 </div>
 
 {% endblock %}
