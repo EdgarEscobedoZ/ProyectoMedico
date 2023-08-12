@@ -125,7 +125,48 @@ def exploracion():
     cs.execute('SELECT nombre_completo FROM tb_pacientes')
     data = cs.fetchall()
     return render_template('Medico/exploraciondiagnostico.html', pacientes = data)
+
+# falta exploracion BD
+
+@app.route('/selectmedico')
+def consulta_paciente():
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT nombre_completo FROM tb_medicos')
+    data = cur.fetchall()
+    return render_template('Medico/seleccionmedico.html', medicos = data)
+
+@app.route('/consultapaciente', methods=['POST'])
+def consulta_paciente2():
+    if request.method == 'POST':
+        VMEDICOC = request.form.get("medico", False)
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT id, nombre_completo, fecha_nacimiento, enfermedades_cronicas, alergias, antecendentes_familiares FROM tb_pacientes where medico = %s', (VMEDICOC,))
+        data = cur.fetchall()
+        return render_template('Medico/consultapaciente.html', pacientes = data)
     
+@app.route('/actualizacion_paciente/<id>')
+def actuadmin2(id):
+    cs = mysql.connection.cursor()
+    cs.execute('SELECT id, nombre_completo, fecha_nacimiento, enfermedades_cronicas, alergias, antecendentes_familiares FROM tb_pacientes where id = %s', (id,))
+    data = cs.fetchall()
+    return render_template('Medico/actualizacion_paciente.html', Edicion = data)
+
+@app.route('/actualizacion_pacienteBD/<id>', methods=['POST'])
+def actuadminBD2(id):
+    if request.method == 'POST':
+        VNOMBRE = request.form['Nombre']
+        VFECHANAC = request.form['fechanac']
+        VENFERMEDAD = request.form['enfermedades']
+        VALERGIAS = request.form['alergia']
+        VANTECEDENTES = request.form['antecedentes']
+
+        cs = mysql.connection.cursor()
+        cs.execute('UPDATE tb_pacientes SET nombre_completo = %s, fecha_nacimiento = %s, enfermedades_cronicas = %s, alergias = %s, antecendentes_familiares = %s WHERE id = %s', (VNOMBRE, VFECHANAC, VENFERMEDAD, VALERGIAS, VANTECEDENTES, id))
+        mysql.connection.commit()
+    
+    flash('Mensaje')
+    return redirect(url_for('consulta_paciente'))
+
 
 #Ejecucion del servidor
 
