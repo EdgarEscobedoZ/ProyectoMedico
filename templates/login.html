@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <form action="/index" class="formulario">
+    <form action="/login" class="formulario" method="POST">
     <div class="card card-body">
         <h1 class="bustexto">INICIO DE SESIÓN</h1>
         
@@ -23,7 +23,7 @@
         {% endwith %}
 
         <div class="mb-3">
-            <label class="label">RFC</label>
+            <label class="label">Usuario</label>
             <input class="form-control" type="text" required name="Usuario">
         </div>
         

@@ -1,32 +1,69 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, Response
 from flask_mysqldb import MySQL
+from flask_login import LoginManager, login_required, login_user, logout_user
 import subprocess
+
+from user import User
+from mockdbhelper import dbHelper
+
+DB=dbHelper()
+
 
 app = Flask(__name__)
 app.config['MYSQL_HOST']='localhost'
 app.config['MYSQL_USER']='root'
 app.config['MYSQL_PASSWORD']=''
 app.config['MYSQL_DB']='bdcentromedico'
+login_manager = LoginManager(app) 
 app.secret_key='mysecretkey'
 mysql=MySQL(app)
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    user_password = DB.get_user(user_id)
+    if user_password:
+        return User(user_id)
 
 @app.route('/')
-def login():
+def inicio():
     return render_template('login.html')
 
 @app.route('/index')
+@login_required
 def index():
     return render_template('index.html')
 
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("inicio"))
+
+@app.route('/login', methods=['POST'])
+def login():
+    if request.method== 'POST':
+        user = request.form['Usuario']
+        password = request.form['Contraseña']
+        user_password = DB.get_user(user)
+        if user_password and user_password==password:
+            usuario= User(user)
+            login_user(usuario)
+            return redirect(url_for('index'))      
+        
+        flash ('Credenciales incorrectas')
+        return render_template('login.html')    
+        
+    else:
+        return render_template('login.html')
+    
 #   MEDICO ADMINISTRADOR    #
 
 @app.route('/registro_admin')
+@login_required
 def registro_admin():
     return render_template('MedicoAdmin/registro_admin.html')
 
 @app.route("/registro_adminBD", methods=['POST'])
+@login_required
 def registrarMedico():
     if request.method == 'POST':
         VRFC = request.form['RFC']
@@ -45,6 +82,7 @@ def registrarMedico():
     return redirect(url_for('registro_admin'))
 
 @app.route('/consulta_admin')
+@login_required
 def consulta_admin():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM tb_medicos')
@@ -52,6 +90,7 @@ def consulta_admin():
     return render_template('MedicoAdmin/consulta_admin.html', medicos = data)
 
 @app.route('/actualizacion_admin/<id>')
+@login_required
 def actuadmin(id):
     cs = mysql.connection.cursor()
     cs.execute('SELECT * FROM tb_medicos where id = %s', (id,))
@@ -59,6 +98,7 @@ def actuadmin(id):
     return render_template('MedicoAdmin/actualizacion_admin.html', Edicion = data)
 
 @app.route('/actualizacion_adminBD/<id>', methods=['POST'])
+@login_required
 def actuadminBD(id):
     if request.method == 'POST':
         VRFC = request.form['RFC']
@@ -76,6 +116,7 @@ def actuadminBD(id):
     return redirect(url_for('consulta_admin'))
 
 @app.route('/eliminar_admin/<id>')
+@login_required
 def eliminaradmin(id):
     cs = mysql.connection.cursor()
     cs.execute('select * from tb_medicos where id = %s', (id,))
@@ -83,6 +124,7 @@ def eliminaradmin(id):
     return render_template('MedicoAdmin/eliminar_admin.html', Eliminar = data)
 
 @app.route('/eliminar_adminBD/<id>', methods=['POST'])
+@login_required
 def eliminaradminBD(id):
     if request.method == 'POST':
         cs = mysql.connection.cursor()
@@ -94,6 +136,7 @@ def eliminaradminBD(id):
 #   MEDICO GENERAL  #
 
 @app.route('/expediente_paciente')
+@login_required
 def expediente_paciente():
     cs = mysql.connection.cursor()
     cs.execute('SELECT nombre_completo FROM tb_medicos')
@@ -101,6 +144,7 @@ def expediente_paciente():
     return render_template('Medico/expediente_paciente.html', medico = data)
 
 @app.route("/expediente_pacienteBD", methods=['POST'])
+@login_required
 def registrarPaciente():
     if request.method == 'POST':
         VMEDICO = request.form.get("medico", False)
@@ -121,6 +165,7 @@ def registrarPaciente():
     return redirect(url_for('expediente_paciente'))
 
 @app.route('/exploracion')
+@login_required
 def exploracion():
     cs = mysql.connection.cursor()
     cs.execute('SELECT nombre_completo FROM tb_pacientes')
@@ -131,6 +176,7 @@ def exploracion():
     return render_template('Medico/exploraciondiagnostico.html', pacientes = data, medicos = data2)
 
 @app.route('/exploracionBD', methods=['POST'])
+@login_required
 def exploracionBD():
     if request.method == 'POST':
         VPACIENTE = request.form.get("paciente", False)
@@ -152,6 +198,7 @@ def exploracionBD():
     return redirect(url_for('exploracion'))
 
 @app.route('/selecpaciente')
+@login_required
 def selecpaciente():
     cs = mysql.connection.cursor()
     cs.execute('SELECT paciente FROM tb_exploraciones')
@@ -159,6 +206,7 @@ def selecpaciente():
     return render_template('Medico/seleccionpaciente.html', pacientes = data)
 
 @app.route('/consultacitas', methods=['POST'])
+@login_required
 def consultacitas():
     if request.method == 'POST':
         VPACIENTE = request.form.get("paciente", False)
@@ -169,6 +217,7 @@ def consultacitas():
 
 
 @app.route('/selectmedico')
+@login_required
 def consulta_paciente():
     cur = mysql.connection.cursor()
     cur.execute('SELECT nombre_completo FROM tb_medicos')
@@ -176,6 +225,7 @@ def consulta_paciente():
     return render_template('Medico/seleccionmedico.html', medicos = data)
 
 @app.route('/consultapaciente', methods=['POST'])
+@login_required
 def consulta_paciente2():
     if request.method == 'POST':
         VMEDICOC = request.form.get("medico", False)
@@ -185,6 +235,7 @@ def consulta_paciente2():
         return render_template('Medico/consultapaciente.html', pacientes = data)
     
 @app.route('/actualizacion_paciente/<id>')
+@login_required
 def actuadmin2(id):
     cs = mysql.connection.cursor()
     cs.execute('SELECT id, nombre_completo, fecha_nacimiento, enfermedades_cronicas, alergias, antecendentes_familiares FROM tb_pacientes where id = %s', (id,))
@@ -192,6 +243,7 @@ def actuadmin2(id):
     return render_template('Medico/actualizacion_paciente.html', Edicion = data)
 
 @app.route('/actualizacion_pacienteBD/<id>', methods=['POST'])
+@login_required
 def actuadminBD2(id):
     if request.method == 'POST':
         VNOMBRE = request.form['Nombre']
@@ -208,6 +260,7 @@ def actuadminBD2(id):
     return redirect(url_for('consulta_paciente'))
 
 @app.route('/generareceta/<id>')
+@login_required
 def generareceta(id):
     cs = mysql.connection.cursor()
     cs.execute('SELECT * FROM tb_exploraciones where id = %s', (id,))
