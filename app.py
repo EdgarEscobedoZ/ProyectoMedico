@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, Response
 from flask_mysqldb import MySQL
+import subprocess
 
 app = Flask(__name__)
 app.config['MYSQL_HOST']='localhost'
@@ -124,9 +125,48 @@ def exploracion():
     cs = mysql.connection.cursor()
     cs.execute('SELECT nombre_completo FROM tb_pacientes')
     data = cs.fetchall()
-    return render_template('Medico/exploraciondiagnostico.html', pacientes = data)
+    cs.execute('SELECT nombre_completo FROM tb_medicos')
+    data2 = cs.fetchall()
 
-# falta exploracion BD
+    return render_template('Medico/exploraciondiagnostico.html', pacientes = data, medicos = data2)
+
+@app.route('/exploracionBD', methods=['POST'])
+def exploracionBD():
+    if request.method == 'POST':
+        VPACIENTE = request.form.get("paciente", False)
+        VMEDICO = request.form.get("medico", False)
+        VFECHA = request.form['fechaexp']
+        VALTURA = request.form['altura']
+        VTEMPERATURA = request.form['temperatura']
+        VLATIDOS = request.form['latidos']
+        VSATURACION = request.form['saturacion']
+        VSINTOMAS = request.form['sintomas']
+        VTRATAMIENTO = request.form['tratamiento']
+        VESTUDIOS = request.form['estudios']
+
+        cs = mysql.connection.cursor()
+        cs.execute('INSERT INTO tb_exploraciones (paciente, medico, fecha, altura, temperatura, latidos, saturacion, sintomas, tratamiento, estudios) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',(VPACIENTE, VMEDICO, VFECHA, VALTURA, VTEMPERATURA, VLATIDOS, VSATURACION, VSINTOMAS, VTRATAMIENTO, VESTUDIOS))
+        mysql.connection.commit()
+
+    flash('Mensaje')
+    return redirect(url_for('exploracion'))
+
+@app.route('/selecpaciente')
+def selecpaciente():
+    cs = mysql.connection.cursor()
+    cs.execute('SELECT paciente FROM tb_exploraciones')
+    data = cs.fetchall()
+    return render_template('Medico/seleccionpaciente.html', pacientes = data)
+
+@app.route('/consultacitas', methods=['POST'])
+def consultacitas():
+    if request.method == 'POST':
+        VPACIENTE = request.form.get("paciente", False)
+        cs = mysql.connection.cursor()
+        cs.execute('SELECT id, paciente, fecha, estudios FROM tb_exploraciones where paciente = %s', (VPACIENTE,))
+        data = cs.fetchall()
+        return render_template('Medico/consultacitas.html', citas = data)
+
 
 @app.route('/selectmedico')
 def consulta_paciente():
@@ -166,6 +206,15 @@ def actuadminBD2(id):
     
     flash('Mensaje')
     return redirect(url_for('consulta_paciente'))
+
+@app.route('/generareceta/<id>')
+def generareceta(id):
+    cs = mysql.connection.cursor()
+    cs.execute('SELECT * FROM tb_exploraciones where id = %s', (id,))
+    data = cs.fetchall()
+    
+
+    return render_template('Medico/receta.html', pacientes = data)
 
 
 #Ejecucion del servidor

@@ -22,6 +22,17 @@
                     <form action="/exploracionBD" method="POST">
                         
                             <div class="card card-body mb-3">
+
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select " name="medico">
+                                            <option selected>Seleccione un Médico</option>
+                                            {% for med in medicos %}
+                                            <option value="{{med.0}}">{{med.0}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="">Médico</label>
+                                    </div>
+
                                     <div class="form-floating mb-3">
                                         <select class="form-select" name="paciente">
                                             <option selected>Seleccione</option>
@@ -32,6 +43,7 @@
                                         <label for="">Paciente</label>
                                     </div>
 
+                                    
                                     <h4>Datos de Exploración</h4>
 
                                     <div class="form-floating mb-3">
@@ -55,7 +67,7 @@
                                     </div>
 
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" type="number" name="altura" id="fsat" placeholder="Saturación de Oxígeno en Glucosa (%)" required>
+                                        <input class="form-control" type="number" name="saturacion" id="fsat" placeholder="Saturación de Oxígeno en Glucosa (%)" required>
                                         <label for="fsat">Saturación de Oxígeno en Glucosa (%)</label>
                                     </div>             
                             </div>
@@ -74,7 +86,7 @@
                                 </div> 
                                 
                                 <div class="form-check mb-3" style="text-align: left;">
-                                    <input class="form-check-input" type="checkbox" value="Sí" id="flexCheckIndeterminate">
+                                    <input class="form-check-input" type="checkbox" value="Sí" name="estudios" id="flexCheckIndeterminate">
                                     <label class="form-check-label" for="flexCheckIndeterminate">
                                       Requiere Estudios
                                     </label>
@@ -82,7 +94,7 @@
                         </div>
 
                         <div class="card card-body mb-3">
-                            <button type="submit" class="btn btn-primary">Guardar y Generar Receta</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form> 
                 </div> 

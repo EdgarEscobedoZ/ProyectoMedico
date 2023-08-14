@@ -1,0 +1,46 @@
+{% extends 'plantilla.html' %}
+
+{% block body %}
+
+
+{% with mensajes= get_flashed_messages() %}
+{% if mensajes %}
+
+    {% for msj in mensajes%}
+
+        <script> Swal.fire('Datos Guardados', '¡Los datos se actualizaron con éxito!', 'success')</script>
+
+    {%endfor%}
+{% endif %}
+{% endwith %}
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card card-body mt-5">
+                <h2 class="mt-3 mb-3">Consultar Citas por pacientes</h2>
+                <form action="/consultacitas" method="post">
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select " name="paciente">
+                            <option selected>Seleccione un Paciente</option>
+                            {% for pac in pacientes %}
+                            <option value="{{pac.0}}">{{pac.0}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="">Paciente</label>
+                    </div>
+
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-info">Consultar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock %}
