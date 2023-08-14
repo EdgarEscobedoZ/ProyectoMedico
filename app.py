@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, Response
 from flask_mysqldb import MySQL
 from flask_login import LoginManager, login_required, login_user, logout_user
-import subprocess
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.platypus import SimpleDocTemplate, Flowable, PageBreak
+from reportlab.lib.styles import getSampleStyleSheet
+from io import BytesIO
+from xhtml2pdf import pisa
+
 
 from user import User
 from mockdbhelper import dbHelper
@@ -266,8 +272,28 @@ def generareceta(id):
     cs.execute('SELECT * FROM tb_exploraciones where id = %s', (id,))
     data = cs.fetchall()
     
+    html_content = render_template('Medico/receta.html', pacientes=data)
 
-    return render_template('Medico/receta.html', pacientes = data)
+    response = Response(content_type='application/pdf')
+    response.headers['Content-Disposition'] = 'inline; filename=receta.pdf'
+
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    story = []
+
+    # Convertir el HTML a PDF utilizando xhtml2pdf
+    result = pisa.CreatePDF(html_content, dest=buffer)
+
+    if not result.err:
+        pdf_data = buffer.getvalue()
+        buffer.close()
+
+        response.data = pdf_data
+        return response
+    else:
+        buffer.close()
+        return "Error generando el PDF"
 
 
 #Ejecucion del servidor
