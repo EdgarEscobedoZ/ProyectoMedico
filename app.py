@@ -200,10 +200,8 @@ def exploracionBD():
         cs.execute('INSERT INTO tb_exploraciones (paciente, medico, fecha, altura, temperatura, latidos, saturacion, sintomas, tratamiento, estudios) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',(VPACIENTE, VMEDICO, VFECHA, VALTURA, VTEMPERATURA, VLATIDOS, VSATURACION, VSINTOMAS, VTRATAMIENTO, VESTUDIOS))
         mysql.connection.commit()
 
-        cs.execute('SELECT * FROM tb_exploraciones where paciente =%s and medico = %s', (VPACIENTE, VMEDICO))
+        cs.execute('SELECT * FROM tb_exploraciones where paciente =%s and medico = %s and fecha = %s', (VPACIENTE, VMEDICO, VFECHA))
         data = cs.fetchall()
-        
-
         #return render_template('Medico/receta.html', pacientes = data)
 
         html_content = render_template('Medico/receta.html', pacientes=data)
@@ -224,13 +222,14 @@ def exploracionBD():
             buffer.close()
 
             response.data = pdf_data
+            
             return response
         else:
             buffer.close()
-            return "Error generando el PDF"
+            return redirect(url_for('exploracion'))
 
-    flash('Mensaje')
-    return redirect(url_for('exploracion'))
+    
+
 
 @app.route('/selecpaciente')
 @login_required
