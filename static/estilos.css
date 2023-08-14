@@ -1,6 +1,15 @@
 html {
     height: 100%;
 }
+.container2 {
+    max-width: 1010px;
+    margin: 0 auto;
+    padding: 270px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-image: url("https://www.postdicom.com/images/blog-posts/social-media-images/medical-imaging-types-and-modalities.png");
+    background-size: 100%;
+}
 
 body {
     margin:0;
