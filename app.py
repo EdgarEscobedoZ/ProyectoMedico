@@ -200,6 +200,35 @@ def exploracionBD():
         cs.execute('INSERT INTO tb_exploraciones (paciente, medico, fecha, altura, temperatura, latidos, saturacion, sintomas, tratamiento, estudios) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',(VPACIENTE, VMEDICO, VFECHA, VALTURA, VTEMPERATURA, VLATIDOS, VSATURACION, VSINTOMAS, VTRATAMIENTO, VESTUDIOS))
         mysql.connection.commit()
 
+        cs.execute('SELECT * FROM tb_exploraciones where paciente =%s and medico = %s', (VPACIENTE, VMEDICO))
+        data = cs.fetchall()
+        
+
+        #return render_template('Medico/receta.html', pacientes = data)
+
+        html_content = render_template('Medico/receta.html', pacientes=data)
+
+        response = Response(content_type='application/pdf')
+        response.headers['Content-Disposition'] = 'inline; filename=receta.pdf'
+
+        buffer = BytesIO()
+
+        doc = SimpleDocTemplate(buffer, pagesize=letter)
+        story = []
+
+        # Convertir el HTML a PDF utilizando xhtml2pdf
+        result = pisa.CreatePDF(html_content, dest=buffer)
+
+        if not result.err:
+            pdf_data = buffer.getvalue()
+            buffer.close()
+
+            response.data = pdf_data
+            return response
+        else:
+            buffer.close()
+            return "Error generando el PDF"
+
     flash('Mensaje')
     return redirect(url_for('exploracion'))
 
@@ -272,6 +301,9 @@ def generareceta(id):
     cs.execute('SELECT * FROM tb_exploraciones where id = %s', (id,))
     data = cs.fetchall()
     
+
+    #return render_template('Medico/receta.html', pacientes = data)
+
     html_content = render_template('Medico/receta.html', pacientes=data)
 
     response = Response(content_type='application/pdf')
